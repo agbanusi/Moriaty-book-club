@@ -1,0 +1,22 @@
+{
+  "name": "book-club",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "build": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "cloudinary": "^1.22.0",
+    "dotenv": "^8.2.0",
+    "mongodb": "^3.6.0",
+    "nodemon": "^2.0.4",
+    "socketio": "^1.0.0"
+  }
+}

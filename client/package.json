@@ -1,0 +1,39 @@
+{
+  "name": "book-club",
+  "version": "1.0.0",
+  "description": "A book trading club",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel watch index.html",
+    "build": "parcel build index.html"
+  },
+  "keywords": [
+    "book",
+    "trading",
+    "club"
+  ],
+  "author": "John",
+  "license": "ISC",
+  "dependencies": {
+    "pdfjs-dist": "^2.5.207",
+    "react-paypal-button-v2": "^2.6.2",
+    "react-paystack": "^3.0.1",
+    "react-pdf": "^5.0.0",
+    "react-router-dom": "^5.2.0",
+    "short-unique-id": "^3.0.4",
+    "shortid": "^2.2.15",
+    "vanilla-emoji-picker": "^0.2.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },"proxy": "http://localhost:5000/"
+}

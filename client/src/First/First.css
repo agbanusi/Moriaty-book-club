@@ -1,0 +1,51 @@
+.background{
+    background-image: url('../../asset/027-p-1080.png');
+    margin:0px;
+    background-size: 100% 100%;
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    height:100vh;
+    width:100vw;
+    place-items: center;
+}
+.firstImg{
+    height:17.5rem;
+    width:17.5rem;
+    animation: pop;
+    animation-duration: 2s;
+}
+.firstImg:hover{
+    transform: scale(1.5);
+}
+@keyframes pop{
+    0% {
+        opacity: 0;
+    }
+    100%{
+        opacity: 1
+    }
+}
+.left{
+    margin-left:1.5rem;
+    margin-right: 1rem;
+}
+.left h1{
+    margin-left: 1.5rem;
+    margin-top: 2.5rem;
+    font-family: 'Russo One', sans-serif;
+}
+.left p{
+    font-family: 'Russo One', sans-serif;
+    font-size: 18px;
+}
+.orange{
+    background-color: orange;
+    color:black;
+    font-family: 'Russo One', sans-serif;
+    height:4rem;
+    width: 12rem;
+    border-radius: 1rem;
+}
+body{
+    margin:0px;
+}

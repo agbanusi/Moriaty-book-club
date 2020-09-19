@@ -1,0 +1,226 @@
+.User{
+    width:100vw;
+    display:grid;
+    justify-items: center;
+    background-color:rgb(233, 244, 247);
+}
+.headUser{
+    width:100%;
+    height: 5rem;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 1.5px 3px 3px 3px grey;
+    background-color: lightseagreen;
+}
+.headUser h2{
+    margin-left:3.5rem;
+}
+.profileUser{
+    margin-right: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.statsUser{
+    margin-top: 1rem;
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.addUser{
+    width:100%;
+    margin-top: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.uploadUser{
+    border-radius: 0.75rem;
+    font-size: 1.25rem;
+    height: 4rem;
+    width: 7rem;
+    background-color: gold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.uploadUser:hover{
+   color: white;
+   background-color: teal;
+}
+
+.extraUser{
+    width:80%;
+    margin: 1rem 10% 1rem 10%;
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.extras{
+    cursor:pointer;
+    background-color: #ff9661;
+    color:black;
+    width:5.5rem;
+    height:3rem;
+    border-radius: 0.75rem;
+}
+.extras:hover{
+    background-color:rgb(48, 220, 166);
+}
+.extra{
+    color:black;
+    text-decoration: none;
+}
+.podCover{
+    position:fixed;
+    top:0;
+    left:0;
+    height:100vh;
+    width:100vw;
+    background: #00000050;
+    display: grid;
+    place-items:center;
+}
+.books{
+    width:100%;
+}
+.podMain{
+    height:70%;
+    width: 50%;
+    border-radius: 1rem;
+    box-shadow: 3px 3px 3px 3px black;
+    background-color: white;
+}
+.close-icon{
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 100%;
+    line-height: 1.25rem;
+    text-align: center;
+    border: 1px solid #999;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-top: -0.75rem;
+    background-color:white;
+    margin-left: 97.5%;
+}
+.mainPod{
+    width:100%;
+    height: 95%;
+}
+.dividePod{
+    margin-left:25%;
+    width: 50%;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#mesAudioTag{
+    width:100%;
+    height:75%;
+    display:grid;
+    place-items: center;
+}
+#mesRetake{
+    margin-bottom:0px;
+    height: 1.5rem;
+}
+.mesVideoTag{
+    width:100%;
+    height: 75%;
+}
+.dividerPod{
+    cursor:pointer;
+}
+.bigPod{
+    height: 5rem;
+    width: 5rem;
+    font-size: 2rem;
+    border-radius: 50%;
+    text-align:center;
+    line-height:5rem;
+    border:1px solid #999;
+}
+.bigVidPod{
+    margin-left:42.5%;
+}
+.videoPod{
+    height: 75%;
+    width: 70%;
+    margin-left:15%;
+}
+.videoPodPod{
+    height:95%;
+    width:100%;
+}
+#messagePod{
+    margin-left:40%;
+}
+.groupCover{
+    width:100%;
+    height: 90%;
+    display: grid;
+    justify-items: center;
+}
+.groupForm{
+    height:75%;
+    width:85%;
+    display: grid;
+    justify-items: center;
+}
+.groupForm div{
+    width: 100%;
+}
+.groupForm h4{
+    margin-bottom: 0.75rem;
+}
+.groupForm input, .groupForm textarea{
+    width: 80%;
+    border-radius: 0.75rem;
+    padding: 0.125rem 0.375rem 0.125rem 0.375rem;
+}
+.groupForm input:focus, .groupForm textarea:focus{
+    border: 3px solid green;
+}
+.submitGroup{
+    margin-top: 1.5rem;
+    height: 3rem;
+    width: 5rem;
+    color: green;
+    border-radius: 1rem;
+    border: 3px solid green;
+}
+.submitGroup:hover{
+    background-color: green;
+    color: white;
+}
+.contentLands{
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    display:grid;
+    width:90%;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fit,20rem);
+    grid-row-gap: 3rem;
+    grid-column-gap: 1rem;
+}
+.contentL{
+    margin-top: 1.5rem;
+    width:100%;
+    display:grid;
+    justify-items: center;
+}
+.undefUser{
+    margin-left: 55vw;
+    width:200%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.lastUserL{
+    margin-left: 1.5rem ;
+    text-decoration:none;
+}
