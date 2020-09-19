@@ -89,7 +89,7 @@ export default class Landing extends Component {
                         <a href='https://api.whatsapp.com/send?phone=2348073975086' target='_blank'><i className="land fa fa-whatsapp" aria-hidden="true"></i></a>
                         <a href='mailto: agbanusijohn@gmail.com' target='_blank'><i className="land fa fa-envelope"></i></a>
                         <a href='https://twitter.com/agbanusijohn' target='_blank' ><i className="land fa fa-twitter" aria-hidden="true"></i></a>
-                        <a href='https://instagram.com/kenechuku217' target='_blank'><i className="land fa fa-instagram" aria-hidden="true"></i></a>
+                        <a href='https://instagram.com/agbanusi_john' target='_blank'><i className="land fa fa-instagram" aria-hidden="true"></i></a>
                     </div>
                     <p>© {new Date().getFullYear()}</p>
                 </footer>
