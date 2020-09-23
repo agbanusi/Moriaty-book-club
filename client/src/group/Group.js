@@ -1,23 +1,15 @@
 import React, { Component } from 'react'
 import './group.css'
+import io from 'socket.io-client';
 import EmojiPicker from 'vanilla-emoji-picker/dist/emojiPicker'
 
-/*global*/
-//const socket = io()
-const peerConnection = window.RTCPeerConnection ||
-     window.mozRTCPeerConnection ||
-     window.webkitRTCPeerConnection ||
-     window.msRTCPeerConnection;
+const socket = io()
 
-const sessionDescription = window.RTCSessionDescription ||
-     window.mozRTCSessionDescription ||
-     window.webkitRTCSessionDescription ||
-     window.msRTCSessionDescription;
-
-navigator.getUserMedia = navigator.getUserMedia ||
+var nav =   navigator.getUserMedia ||
      navigator.webkitGetUserMedia ||
      navigator.mozGetUserMedia ||
-     navigator.msGetUserMedia;
+    navigator.msGetUserMedia||
+    OTPlugin.getUserMedia;
 
 var id
 export default class Group extends Component {
@@ -31,7 +23,8 @@ export default class Group extends Component {
             group:[],
             chats:[],
             chat:'',
-            type:true
+            type:true,
+            groupId:''
         }
     }
     async componentDidMount(){
@@ -44,26 +37,26 @@ export default class Group extends Component {
         const data= await returned.json()
         //make sure the server does the .ice.v.iceServers.urls and convert to info
         if(data.status=='success'){
-            this.setState({user:data.user, group:data.item.group,chats:data.item.chats })
-            //this.sockets()
+            this.setState({user:data.user, group:data.item,chats:data.item.chats, groupId })
+        }else{
+            this.props.history.push('/home')
         }
         
     }
     sockets=()=>{
         socket.on('join', data => {
-            //let users = data.users.filter(i => i !== data.id)
-            //addUsers(users)
-           
-            socket.emit('notify-users',{...data,ident,username,return:false})
+            socket.emit('notify-users',{id:data,ident:this.state.groupId,username:this.state.user.username,return:false})
         })
         socket.on('add-users', data => {
             if(!data.return){
-               addUsers([data.id])
+               let reb=this.state.group.filter(i=> i !==data.username)
+               this.setState({group: [...reb,data.username]})
                //for a single p2p, for multiple I'll advise you send an array of objects containing id and usernames
-               socket.emit('notify-users',{id:inner,ident,username,return:true})
+               socket.emit('notify-users',{id:data.id,ident:data.ident,username:this.state.user.username,return:true})
             }
             else{
-               addUsers([data.id])
+                let reb=this.state.group.filter(i=> i !==data.username)
+                this.setState({group: [...reb,data.username]})
             }
         })
         socket.on('remove-user', (id) => {
@@ -114,10 +107,23 @@ export default class Group extends Component {
     }
 
     start=()=>{
-        MesAudio.style.backgroundColor='blue'
-        navigator.getUserMedia({audio:true}).then(stream=>{this.record(stream)})
-        this.setState({type:false})
-        this.rec.start()
+        navigator.mediaDevices.getUserMedia({audio:true,video:false})
+        .then((stream)=>{
+            this.record(stream)
+            this.rec.start()
+            mesAudio.style.color='blue'
+            this.setState({type:false})
+        })
+        .catch((err)=>{
+            nav.call(navigator,{audio:true},(stream)=>{
+                this.record(stream)
+                this.rec.start()
+                mesAudio.style.color='blue'
+                this.setState({type:false})
+            },(er)=>{
+                console.log(er.name+' occured, which is '+er.message)
+            })
+        })
     }
 
     stop=()=>{
@@ -153,7 +159,7 @@ export default class Group extends Component {
             audioChunk.push(e.data)
             this.setState({audioChunk})
             if(this.rec.state=='inactive'){
-                let blob=new Blob (audioChunk,{type:'audio/mpeg'})
+                let blob=new Blob (audioChunk,{type:'audio/mpeg-3'})
                 let audio = await this.upload(blob)
                 let item={message:audio, type:true, measure:'audio'}
                 this.setState((state)=>({chats:[...state.chats,item]}))

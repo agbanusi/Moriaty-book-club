@@ -1,0 +1,23 @@
+.rightBook{
+    height:90vh;
+    width:100vw;
+    display: grid;
+    justify-items: center;
+}
+.rightBook div{
+    display: grid;
+}
+.buyBook{
+    margin-top: 1rem;
+}
+.lendBook, .buyBook{
+    margin-bottom: 1rem;
+    margin-bottom: 1rem;
+    height: 3.5rem;
+    border: 0px;
+    border-radius: 0.25rem;
+    background-color: #333333;
+    color: white;
+    font-size: 1.125rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

@@ -79,7 +79,7 @@ export default class Landing extends Component {
                             <p className='typeLand'>{i.docType}</p>
                             <p className='typeLand'>{i.description}</p>
                             <h5 className='typeLand'>$ {i.price}</h5>
-                            <button className='buyLand'><Link style={{color:'whitesmoke',textDecoration:'none',right:'0px'}} to={'/purchase?id='+i.id}>Get</Link></button>    
+                            <button className='buyLand'><Link style={{color:'whitesmoke',textDecoration:'none',right:'0px'}} to={'/purchase?id='+encodeURI(i.id)}>Get</Link></button>    
                         </div>
                     )}
                 </div>

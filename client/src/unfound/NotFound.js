@@ -7,7 +7,7 @@ const NotFound=()=>{
         <div className='coverNot'>
         <div>
             <h2>Ouch the Page you're looking for does not exist</h2>
-            <p><h4>You can go back to home here</h4> <Link className='returnNot' to='/home'>Home</Link></p>
+            <p><h4>You can go back to home here</h4>{' '} <Link className='returnNot' to='/home'>Home</Link></p>
         </div>
         </div>
     )

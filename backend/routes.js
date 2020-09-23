@@ -99,8 +99,8 @@ function routes(app,dbe){
         if(!id){
             res.json({'status':'Failed'})
         }else{
-            db.findOneAndUpdate({ _: new ObjectID(id)}, {$push: {podcasts: audio}}, (err,doc)=>{
-                dbb.findOneAndUpdate({id:idd},{$push: {podcasts: {id: podId, audio,owner: {name:doc.fullName, avatar:doc.profileImg} } }})
+            db.findOneAndUpdate({ _: new ObjectID(id)}, {$push: {podcasts: {id: podId, ...audio} }}, (err,doc)=>{
+                dbb.findOneAndUpdate({id:idd},{$push: {podcasts: {id: podId,...audio,owner: {name:doc.fullName, avatar:doc.profileImg} } }})
                 if(doc){
                     res.json({'status':'success'})
                 }else{
@@ -115,8 +115,8 @@ function routes(app,dbe){
         let id = req.body.id
         let group = req.body.group
         let grpId= req.body.grpId
-        db.findOneAndUpdate({ _id: new ObjectID(id)}, {$push: {groups: group}}, (err,doc)=>{
-            dbb.findOneAndUpdate({id:idd},{$push: {groups: {id: grpId, group, chats:[], owner:{name:doc.fullName, avatar:doc.profileImg} } }})
+        db.findOneAndUpdate({ _id: new ObjectID(id)}, {$push: {groups: {id: grpId, ...group} }}, (err,doc)=>{
+            dbb.findOneAndUpdate({id:idd},{$push: {groups: {id: grpId, ...group, chats:[], owner:{name:doc.fullName, avatar:doc.profileImg} } }})
                 if(doc){
                     res.json({'status':'success'})
                 }else{
@@ -125,11 +125,29 @@ function routes(app,dbe){
         })
     })
 
+    //register
+    app.post('/register',(req,res)=>{
+        let form=req.body.form
+        db.findOne({username: form[2]},(err,doc)=>{
+            if(doc){
+                res.json({'status':'Failed'})
+            }else{
+                bcrypt.hash(form[5], 13, (err, hash)=>{
+                    db.insertOne({email:form[3], fullName:form[0]+" "+form[1], username:form[2],password:hash,books:[], podcasts:[], groups:[] },(err, docs)=>{
+                        res.cookie('id',docs.ops[0]._id, { maxAge: 3600*24*15, httpOnly: false, sameSite: true })
+                        res.json({'status':'success'})
+                    })
+                })
+            }
+        })
+        
+
+    })
+
     //login
     app.post('/login',(req,res)=>{
         let name=req.body.username
         let password=req.body.password
-        console.log(name,password)
         db.findOne({$or: [{username: name}, {email: name} ]}, (err,doc)=>{
             if (doc){
                 bcrypt.compare(password,doc.password, (err,result)=>{
@@ -185,16 +203,26 @@ function routes(app,dbe){
         let id=req.body.id
         let podId=req.body.podId
         let type=req.body.type
-        db.findOneAndUpdate({_id: new ObjectID(id)},{$inc :type=='like'?{'audio.likes': 1 }: {'audio.listens': 1 } }, (err,doc)=>{
+        db.findOne({_id: new ObjectID(id)}, (err,doc)=>{
             if(doc){
                 dbb.findOne({id:idd}, (err,docs)=>{
                     let podcasts=docs.podcasts
+                    let podcasts2=doc.podcasts
                     let podcast = podcasts.find(i => i.id==podId)
+                    let podcast2= podcasts2.find(i => i.id==podId)
                     let podcastInd = podcasts.findIndex(i => i.id==podId)
-                    type=='like'?podcast.audio.likes=podcast.audio.likes+1:
-                    podcast.audio.listens=podcast.audio.listens+1
+                    let podcastInd2 = podcasts2.findIndex(i => i.id==podId)
+                    if(type=='like'){
+                        podcast.audio.likes=podcast.audio.likes+1
+                        podcast2.audio.likes=podcast2.audio.likes+1
+                    }else{
+                        podcast.audio.listens=podcast.audio.listens+1
+                        podcast2.audio.listens=podcast2.audio.listens+1
+                    }
                     podcasts = [...podcasts.slice(0,podcastInd),podcast,...podcasts.slice(podcastInd+1)]
+                    podcasts2 = [...podcasts2.slice(0,podcastInd2),podcast2,...podcasts2.slice(podcastInd2+1)]
                     db.findOneAndUpdate({id:idd},{$set: {podcasts} })
+                    db.findOneAndUpdate({_id: new ObjectID(id)},{$set: {podcasts2} })
                     res.json({'status':'success',item: podcast, id:podId})
                 })
             }else{
@@ -229,6 +257,10 @@ function routes(app,dbe){
                 dbb.findOne({id:idd}, (err,docs)=>{
                     let podcasts=docs.groups
                     let podcast = podcasts.find(i => i.id==grpId)
+                    podcast.list=[...podcast.list, doc.username]
+                    let podInd = podcasts.findIndex(i => i.id==grpId)
+                    podcasts=[...podcasts.slice(0,podInd),podcast,...podcasts.slice(podInd)]
+                    dbb.findOneAndUpdate({id:idd},{$set:{podcasts}})
                     let docses={...doc}
                     delete docses.password
                     res.json({'status':'success',item: podcast, id:grpId, user:docses})
@@ -244,7 +276,7 @@ function routes(app,dbe){
         let id=req.body.id
         let grpId=req.body.grpId
         let chats=req.body.chats
-        db.findOneAndUpdate({_id: new ObjectID(id)},{$inc :type=='like'?{'audio.likes': 1 }: {'audio.listens': 1 } }, (err,doc)=>{
+        db.findOne({_id: new ObjectID(id)}, (err,doc)=>{
             if(doc){
                 dbb.findOne({id:idd}, (err,docs)=>{
                     let podcasts=docs.groups

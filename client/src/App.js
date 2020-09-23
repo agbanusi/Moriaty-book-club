@@ -9,6 +9,7 @@ import Grouproom from   './grouplist/Grouproom'
 import Podroom from './Podlist/Podroom'
 import Podcast from './podcast/Podcast'
 import NotFound from './unfound/NotFound'
+import Item from './Register/Register'
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
         <Switch>
             <Route exact path='/' component={First} />
             <Route exact path='/home' component={Landing} />
+            <Route exact path='/register' component={Item} />
             <Route exact path='/user' component={User} />
             <Route exact path='/purchase' component={Purchase} />
             <Route exact path='/bookclubs' component={Grouproom} />

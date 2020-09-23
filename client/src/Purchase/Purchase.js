@@ -22,12 +22,20 @@ export default class Purchase extends Component {
     }
     async componentDidMount(){
         let user=this.getCookie('id')
-        let bookId=decodeURI(this.getUrlParameter('id'))
-        const method={method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:user, bookId})}
-        const jason = await fetch('/book',method)
-        const data = await jason.json()
-        if (data.status=='success'){
-            this.setState({user:data.book, purchase: data.book.purchase, lend:data.book.lend})
+        if(user){
+            let bookId=decodeURI(this.getUrlParameter('id'))
+            console.log(user, bookId)
+            const method={method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:user, bookId})}
+            const jason = await fetch('/book',method)
+            const data = await jason.json()
+            console.log(data)
+            if (data.status=='success'){
+                this.setState({user:data.book, purchase: data.book.purchase, lend:data.book.lend})
+            }else{
+                window.location.href='/home'
+            }
+        }else{
+            window.location.href='/home'
         }
     }
     paymentComplete=async(data,type)=>{
@@ -82,7 +90,7 @@ export default class Purchase extends Component {
               name:this.state.user.name,
               phone: '08012345678',
             },
-            text: `Buy Book for ${this.state.user.price} With PayStack`,
+            text: `Buy This Book for ${this.state.user.price} With PayStack`,
             publicKey:process.env.PAYSTACK,
             onSuccess: () =>{
                 alert("Congratulations!, Transaction completed by " + details.payer.name.given_name + 'the book has been automatically added to your library!')
@@ -100,7 +108,7 @@ export default class Purchase extends Component {
               name:this.state.user.name,
               phone: '08012345678',
             },
-            text: `Lend Book for ${this.state.user.price*0.15} With PayStack`,
+            text: `Lend This Book for ${this.state.user.price*0.15} With PayStack`,
             publicKey:process.env.PAYSTACK,
             onSuccess: () =>{
                 alert("Congratulations!, Transaction completed by " + details.payer.name.given_name + 'the book has been automatically added to your library!')
@@ -122,7 +130,7 @@ export default class Purchase extends Component {
                 <div className='rightBook'>
                     <img src={user.thumbnail} className='bookLand' />
                     <h3>{user.title}</h3>
-                    <h5>{user.format.toUpperCase()}</h5>
+                    <h5>{user.format}</h5>
                     <p>{user.description}</p>
                     {user.purchase?
                         <button className='downBook' onClick={this.open}>{user.lend?'Read online': 'Download and Read'}</button>

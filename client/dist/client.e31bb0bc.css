@@ -170,7 +170,6 @@ body{
     display: flex;
     flex-wrap: wrap;
     width:95vw;
-    justify-content: center;
     align-items: center;
 }
 .closeSignIn{
@@ -188,11 +187,11 @@ body{
 }
 .showLand{
     flex-grow: inherit;
-    width: 16.5rem;
+    min-width: 16rem;
     background-color: white;
     display:grid;
     padding:1rem;
-    margin: 1.5rem;
+    margin: 1rem;
     justify-content: center;
     justify-items: center;
     border-radius: 0.75rem;
@@ -498,6 +497,29 @@ button:focus, input:focus{
     text-decoration:none;
 }
 
+.rightBook{
+    height:90vh;
+    width:100vw;
+    display: grid;
+    justify-items: center;
+}
+.rightBook div{
+    display: grid;
+}
+.buyBook{
+    margin-top: 1rem;
+}
+.lendBook, .buyBook{
+    margin-bottom: 1rem;
+    margin-bottom: 1rem;
+    height: 3.5rem;
+    border: 0px;
+    border-radius: 0.25rem;
+    background-color: #333333;
+    color: white;
+    font-size: 1.125rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 /* Copyright 2014 Mozilla Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -981,6 +1003,85 @@ img{
 }
 .returnNot{
     text-decoration: none;
+}
+#signedd{
+    width:100%;
+    height:100%;
+    display:grid;
+    justify-items: center;
+}
+.leftin{
+    margin-top: 0px;
+    height:15%;
+    width:100%;
+    text-align: center;
+    display: grid;
+    place-items: center;
+    background-size: 100% 100%;
+    margin-bottom: 1rem;
+}
+.rightReg{
+    text-align:center;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 3px 3px 3px 3px grey;
+    width: 55%;
+    display:grid;
+    justify-items: center;
+    background-color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.ideaCreate{
+    display:flex;
+}
+.log button{
+    margin-left:1rem;
+    height:3rem;
+    width:4rem;
+    border-radius: 0.75rem;
+    color:purple;
+    background-color: darkslateblue;
+}
+.namer{
+    margin-left: 0% !important;
+    margin-top: 2rem;
+    margin-bottom:0.75rem;
+}
+hr{
+    width:100%;
+}
+.names{
+    width:100%;
+    display:grid;
+    align-content: center;
+    justify-items: center;
+}
+.names div{
+    width:80%;
+    display:grid;
+}
+.names div h3{
+    margin-bottom: 0.5rem;
+}
+.names input{
+    border-radius: 0.45rem;
+    padding-left:0.45rem;
+    padding-right:0.45rem;
+}
+.id{
+    margin-top:1rem;
+}
+.but{
+    height:3rem;
+    border-radius: 0.5rem;
+    margin-top:1rem;
+    width: 50%;
+    color: rgb(133, 15, 117);
+    background-color: silver;
+}
+.but:hover, .log button:hover{
+    background-color: purple;
+    color:white;
 }
 
 /*# sourceMappingURL=/client.e31bb0bc.css.map */

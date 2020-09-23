@@ -393,7 +393,7 @@ const Groupy=(props)=>{
             let grpId= shortid.generate()+shortid.generate()
             const url=window.location.hostname+'/bookclub?id='+encodeURI(grpId)
             const group={name,purpose,des,url}
-            const method={method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:sess,grpId, group:{...group,time: Date.now(), likes:0, joined:0} })}
+            const method={method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:sess,grpId,list:[], group:{...group,time: Date.now(), likes:0, joined:0} })}
             const dat = await fetch('/addGroup',method)
             const data = dat.json()
             if(data.status=='success'){
